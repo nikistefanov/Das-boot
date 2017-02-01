@@ -6,6 +6,12 @@
   <artifactId>das-boot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
+  
+  <parent>
+  	<groupId>org.springframework.boot</groupId>
+  	<artifactId>spring-boot-starter-parent</artifactId>
+  	<version>1.3.1.RELEASE</version>
+  </parent>
 
   <name>das-boot</name>
   <url>http://maven.apache.org</url>
@@ -15,6 +21,10 @@
   </properties>
 
   <dependencies>
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-web</artifactId>
+  	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
