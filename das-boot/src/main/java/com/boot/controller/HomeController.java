@@ -8,6 +8,6 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return "Das boot <a href='index.html'>Navigate to site</a>";
+		return "<script>window.location.href = 'index.html';</script>Please enable your javascript...";
 	}
 }
