@@ -59,3 +59,17 @@ to prevent collapsing during animation*/
   -moz-transform: translate3d(100px, 0, 0);
   transform: translate3d(100px, 0, 0);
 }
+.map-wrapper {
+	margin-bottom: 30px;
+}
+.full-width {
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+.navbar {
+	opacity: 0.8;
+}
