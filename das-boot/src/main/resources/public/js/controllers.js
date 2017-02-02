@@ -1,5 +1,11 @@
-angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, popupService, $window, Shipwreck) {
-  $scope.shipwrecks = Shipwreck.query(); //fetch all shipwrecks. Issues a GET to /api/vi/shipwrecks
+angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, $document, popupService, $window, Shipwreck) {
+	 $(document).ready(function() {
+			console.log('ready');
+			console.log($element);
+			$('#divWrp').text('hello');
+		});
+	
+	$scope.shipwrecks = Shipwreck.query(); //fetch all shipwrecks. Issues a GET to /api/vi/shipwrecks
 
   $scope.deleteShipwreck = function(shipwreck) { // Delete a Shipwreck. Issues a DELETE to /api/v1/shipwrecks/:id
     if (popupService.showPopup('Really delete this?')) {

@@ -1,10 +1,5 @@
 angular.module('navController', [])
-	.controller('nav', function($scope, $state, $element) {
-		$(document).ready(function() {
-			console.log('ready');
-			console.log($element);
-			$('#divWrp').text('hello');
-		});
+	.controller('nav', function($scope, $state) {
 		$scope.title = 'WWII Shipwrecks';
 
 		// returns true if the current router url matches the passed in url
