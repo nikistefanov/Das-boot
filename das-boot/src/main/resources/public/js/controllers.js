@@ -1,4 +1,4 @@
-angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, $document, popupService, $window, Shipwreck) {
+angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, $element, $document, popupService, $window, Shipwreck) {
 	 $(document).ready(function() {
 			console.log('ready');
 			console.log($element);
