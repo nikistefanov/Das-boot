@@ -39,6 +39,12 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
 	            case 'Italy':
 	            	image = 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Italy_%281861-1946%29_crowned.svg/23px-Flag_of_Italy_%281861-1946%29_crowned.svg.png';
 	            	break;
+	            case 'Australia':
+	            	image = 'http://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Flag_of_Australia.svg/23px-Flag_of_Australia.svg.png';
+	            	break;
+	            case 'Soviet Union':
+	            	image = 'http://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Flag_of_the_Soviet_Union_%281923-1955%29.svg/23px-Flag_of_the_Soviet_Union_%281923-1955%29.svg.png';
+	            	break;
 	            default:
 	                image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 	        }
