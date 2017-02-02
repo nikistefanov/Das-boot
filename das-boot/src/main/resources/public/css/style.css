@@ -1,12 +1,10 @@
 body {
   padding-top: 20px;
+  overflow-x: hidden;
 }
 .starter-template {
   padding: 40px 15px;
   text-align: center;
-}
-.jumbotron .img-responsive {
-  margin: 0 auto;
 }
 .pad-top {
   padding-top: 60px;

@@ -4,11 +4,11 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
 	Shipwreck.query().$promise.then(function(data) {
 		var bounds = new google.maps.LatLngBounds();
 		
-		var randomPlaceOnMap = {lat: 17.18, lng: 83.33};
+		var northAtlanticOcean = {lat: 43.837686, lng: -35.165842};
 		
         var map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 3,
-          center: randomPlaceOnMap
+          center: northAtlanticOcean
         });
         
         var infoWindow = new google.maps.InfoWindow(), marker, i;
@@ -18,13 +18,36 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
             var infoWindowContent = '<div class="info_content">' +
 	        '<h3>' + theMarker.name + '</h3>' +
 	        '<p>' + theMarker.description + '</p>' + 
+	        '<p>Country: ' + theMarker.condition + '</p>' + 
 	        '<p>Discovered in: ' + theMarker.yearDiscovered + '</p>' + 
 	        '</div>';
+            
+            var image = '';
+            switch (theMarker.condition) {
+	            case 'United States':
+	            	image = 'http://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/US_flag_48_stars.svg/23px-US_flag_48_stars.svg.png';
+	                break;
+	            case 'United Kingdom':
+	                image = 'http://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/23px-Flag_of_the_United_Kingdom.svg.png';
+	                break;
+	            case 'Nazi Germany':
+	            	image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Flag_of_the_German_Reich_%281935%E2%80%931945%29.svg/23px-Flag_of_the_German_Reich_%281935%E2%80%931945%29.svg.png';
+	            	break;
+	            case 'Japan':
+	            	image = 'http://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Merchant_flag_of_Japan_%281870%29.svg/22px-Merchant_flag_of_Japan_%281870%29.svg.png';
+	            	break;
+	            case 'Italy':
+	            	image = 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Italy_%281861-1946%29_crowned.svg/23px-Flag_of_Italy_%281861-1946%29_crowned.svg.png';
+	            	break;
+	            default:
+	                image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+	        }
             
             var marker = new google.maps.Marker({
               position: {lat: theMarker.latitude, lng: theMarker.longitude},
               map: map,
-              title: theMarker.name
+              title: theMarker.name,
+              icon: image
             });
             
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -38,7 +61,8 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
         }
         
         var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-            this.setZoom(2);
+            this.setZoom(3);
+            this.setCenter(northAtlanticOcean);
             google.maps.event.removeListener(boundsListener);
         });
 	});
