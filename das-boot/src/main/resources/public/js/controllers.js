@@ -1,9 +1,15 @@
 angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, $element, $document, popupService, $window, Shipwreck) {
-	 $(document).ready(function() {
-			console.log('ready');
-			console.log($element);
-			$('#divWrp').text('hello');
-		});
+	$(document).ready(function() {
+		var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+	 });
 	
 	$scope.shipwrecks = Shipwreck.query(); //fetch all shipwrecks. Issues a GET to /api/vi/shipwrecks
 
