@@ -1,6 +1,12 @@
 angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, $element, $document, popupService, $window, Shipwreck) {
 	$scope.shipwrecks = Shipwreck.query(); //fetch all shipwrecks. Issues a GET to /api/vi/shipwrecks
 	
+	$scope.isAuthorised = false;
+	
+	$scope.autorised = function() {
+		this.isAuthorised = !this.isAuthorised;
+	};
+	
 	Shipwreck.query().$promise.then(function(data) {
 		var bounds = new google.maps.LatLngBounds();
 		
@@ -15,12 +21,6 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
         
         for (var i = 0; i < data.length; i++) {
             var theMarker = data[i];
-            var infoWindowContent = '<div class="info_content">' +
-	        '<h3>' + theMarker.name + '</h3>' +
-	        '<p>' + theMarker.description + '</p>' + 
-	        '<p>Country: ' + theMarker.condition + '</p>' + 
-	        '<p>Discovered in: ' + theMarker.yearDiscovered + '</p>' + 
-	        '</div>';
             
             var image = '';
             switch (theMarker.condition) {
@@ -53,15 +53,22 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
               position: {lat: theMarker.latitude, lng: theMarker.longitude},
               map: map,
               title: theMarker.name,
-              icon: image
+              icon: image,
+              id: theMarker.id,
+              content: '<div class="info_content">' +
+  	        '<h3>' + theMarker.name + '</h3>' +
+  	        '<p>' + theMarker.description + '</p>' + 
+  	        '<p>Country: ' + theMarker.condition + '</p>' + 
+  	        '<p>Discovered in: ' + theMarker.yearDiscovered + '</p>' + 
+  	        '</div>'
             });
             
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            google.maps.event.addListener(marker, 'click', (function(marker) {
                 return function() {
-                    infoWindow.setContent(infoWindowContent);
+                    infoWindow.setContent(marker.content);
                     infoWindow.open(map, marker);
                 }
-            })(marker, i));
+            })(marker));
 
             map.fitBounds(bounds);
         }
@@ -72,11 +79,6 @@ angular.module('app.controllers', []).controller('ShipwreckListController', func
             google.maps.event.removeListener(boundsListener);
         });
 	});
-	
-	$(document).ready(function() {
-		
-		
-	 });
   $scope.deleteShipwreck = function(shipwreck) { // Delete a Shipwreck. Issues a DELETE to /api/v1/shipwrecks/:id
     if (popupService.showPopup('Really delete this?')) {
       shipwreck.$delete(function() {

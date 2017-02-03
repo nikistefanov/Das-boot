@@ -1,19 +1,21 @@
 <div class="container pad-top">
 	<div class="map-wrapper" id="map_canvas" style="height: 350px;"></div>
-	 <a ui-sref="newShipwreck" class="btn-primary btn-lg nodecoration">Add New Shipwreck</a>
-	 <table class="table shipwrecktable">
-	     <tr>
-	         <td><h3>All Shipwrecks</h3></td>
-	         <td></td>
-	     </tr>
-	     <tr ng-repeat="shipwreck in shipwrecks">
-	         <td>{{shipwreck.name}}</td>
-	         <td>{{shipwreck.description}}</td>
-	         <td>{{shipwreck.yearDiscovered}}</td>
-	         <td>
-	             <a class="btn btn-primary" ui-sref="viewShipwreck({id:shipwreck.id})">View</a>
-	             <a class="btn btn-danger"  ng-click="deleteShipwreck(shipwreck)">Delete</a>
-	         </td>
-	     </tr>
-	 </table>
+	<div class="text-center clearfix">
+	 	<a ui-sref="newShipwreck" class="btn btn-success btn-lg nodecoration pull-right">Add New Shipwreck</a>
+ 	</div>
+	 <hr>
+	 <div class="shipwrecktable">
+	 	<h3 class="text-center">All Shipwrecks</h3>
+	 	<input ng-model="$ctrl.query" class="form-control narrow-search" placeholder="Narrow by typing..." />
+	 	<div class="row" ng-repeat="shipwreck in shipwrecks | orderBy: 'name' | filter:$ctrl.query">
+			<div class="col-md-3">{{shipwreck.name}}</div>
+	        <div class="col-md-4">{{shipwreck.description}}</div>
+	        <div class="col-md-2">{{shipwreck.yearDiscovered}}</div>
+	        <div class="col-md-3 optionsButtons" ng-class="isAuthorised ? 'visibleBtns' : 'hiddenBtns'">
+             	<a class="btn btn-primary" ui-sref="viewShipwreck({id:shipwreck.id})">View</a>
+            	<a class="btn btn-danger"  ng-click="deleteShipwreck(shipwreck)">Delete</a>
+            	<a class="options" ng-click="autorised()"></a>
+	         </div>
+	 	</div>
+	 </div>
 </div>
